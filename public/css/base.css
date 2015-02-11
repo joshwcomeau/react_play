@@ -73,6 +73,10 @@ input[type=submit] {
   padding: 10px 30px;
   border-bottom: 3px solid #56961B;
 }
+input[type=text] {
+  width: 50px;
+  text-align: center;
+}
 
 .dot {
   position: absolute;

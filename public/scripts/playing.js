@@ -17,7 +17,7 @@ var Playground = React.createClass({
     return (
       <div className="playground">
         <Dot data={dotData} />
-        <DotForm onDotSubmit={this.updateDot} />
+        <DotForm initialData={dotData} onDotSubmit={this.updateDot} />
       </div>
     );
   }
@@ -39,14 +39,12 @@ var DotForm = React.createClass({
       dotWidth:  this.refs.width.getDOMNode().value,
       dotHeight: this.refs.height.getDOMNode().value
     });
-
-
   },
   render: function() {
     return (
       <form className="dotForm">
-        <input type="text" placeholder="width" ref="width" onChange={this.handleSubmit} /> 
-        <input type="text" placeholder="height" ref="height" onChange={this.handleSubmit} />
+        <input type="text" placeholder="width" ref="width" value={this.props.initialData.width} onChange={this.handleSubmit}   /> 
+        <input type="text" placeholder="height" ref="height" value={this.props.initialData.height} onChange={this.handleSubmit} />
       </form>
     );
   }
