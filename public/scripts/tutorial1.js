@@ -1,3 +1,10 @@
+// Temp JSON data
+var data = [
+  {author: 'David Duke', text: 'THIS WEBSITE SUCKS'},
+  {author: 'Tammy Weinstein', text: 'I **love** the colours!!!!!'}
+];
+
+
 var converter = new Showdown.converter();
 
 var CommentBox = React.createClass({
@@ -5,7 +12,7 @@ var CommentBox = React.createClass({
     return (
       <div className="commentBox">
         <h1>Comments</h1>
-        <CommentList />
+        <CommentList data={this.props.data} />
         <CommentForm />
       </div>
     );
@@ -15,10 +22,16 @@ var CommentBox = React.createClass({
 
 var CommentList = React.createClass({
   render: function() {
+    var commentNodes = this.props.data.map(function(comment) {
+      return (
+        <Comment author={comment.author}>
+          {comment.text}
+        </Comment>
+      );
+    });
     return (
       <div className="commentList">
-        <Comment author="David Duke">THIS WEBSITE SUCKS!</Comment>
-        <Comment author="Tammy Weinstein">I *love* the colors ^^</Comment>
+        {commentNodes}
       </div>
     );
   }
@@ -48,6 +61,6 @@ var Comment = React.createClass({
 })
 
 React.render(
-  <CommentBox />,
+  <CommentBox data={data} />,
   document.getElementById('content')
 );
