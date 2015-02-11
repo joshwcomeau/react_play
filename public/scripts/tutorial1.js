@@ -1,9 +1,4 @@
 // Temp JSON data
-var data = [
-  {author: 'David Duke', text: 'THIS WEBSITE SUCKS'},
-  {author: 'Tammy Weinstein', text: 'I **love** the colours!!!!!'}
-];
-
 
 var converter = new Showdown.converter();
 
@@ -21,6 +16,10 @@ var CommentBox = React.createClass({
     });
   },
   handleCommentSubmit: function(comment) {
+    var comments = this.state.data;
+    var newComments = comments.concat([comment]);
+    this.setState({data: newComments});
+    
     $.ajax({
       url:      this.props.url,
       dataType: 'json',
