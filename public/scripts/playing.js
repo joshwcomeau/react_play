@@ -44,10 +44,9 @@ var DotForm = React.createClass({
   },
   render: function() {
     return (
-      <form className="dotForm" onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="width" ref="width" /> x 
-        <input type="text" placeholder="height" ref="height" />
-        <input type="submit" value="Update The Dot!" />
+      <form className="dotForm">
+        <input type="text" placeholder="width" ref="width" onChange={this.handleSubmit} /> 
+        <input type="text" placeholder="height" ref="height" onChange={this.handleSubmit} />
       </form>
     );
   }
