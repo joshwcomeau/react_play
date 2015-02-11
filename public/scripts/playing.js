@@ -1,9 +1,23 @@
 var Playground = React.createClass({
+  getInitialState: function() {
+    return { data: { dotWidth: 220, dotHeight: 150} }
+  },
+  updateDot: function(dot) {
+    var dotProps = this.state.data;
+    var newDotProps = _.merge(dotProps, dot);
+    console.log(dot);
+
+    this.setState({data: newDotProps});
+  },
   render: function() {
+    var dotData = {
+      width:  this.state.data.dotWidth,
+      height: this.state.data.dotHeight
+    };
     return (
       <div className="playground">
-        <Dot width={200} height={200} />
-        <DotForm />
+        <Dot data={dotData} />
+        <DotForm onDotSubmit={this.updateDot} />
       </div>
     );
   }
@@ -11,27 +25,28 @@ var Playground = React.createClass({
 
 var Dot = React.createClass({
   render: function() {
-    var dotStyles = {
-      width:  this.props.width,
-      height: this.props.height
-    }
-
     return (
-      <div className="dot" style={dotStyles}></div>
+      <div className="dot" style={this.props.data}></div>
     );
   }
 });
 
 var DotForm = React.createClass({
-  updateDot: function(e) {
+  handleSubmit: function(e) {
     e.preventDefault();
-    // placeholder behavior
-    alert("Updated!");
+    
+    this.props.onDotSubmit({
+      dotWidth:  this.refs.width.getDOMNode().value,
+      dotHeight: this.refs.height.getDOMNode().value
+    });
+
+
   },
   render: function() {
     return (
-      <form className="dotForm" onSubmit={this.updateDot}>
-        <input type="text" placeholder="width" /> x <input type="text" placeholder="height" />
+      <form className="dotForm" onSubmit={this.handleSubmit}>
+        <input type="text" placeholder="width" ref="width" /> x 
+        <input type="text" placeholder="height" ref="height" />
         <input type="submit" value="Update The Dot!" />
       </form>
     );
